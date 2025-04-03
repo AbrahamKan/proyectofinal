@@ -8,6 +8,9 @@ import 'package:proyectofinal/features/auth/domain/entities/app_user.dart';
 import 'package:proyectofinal/features/auth/domain/repos/auth_repo.dart';
 import 'package:proyectofinal/features/auth/presentation/cubits/auth_states.dart';
 
+import '../../domain/entities/app_user.dart';
+import 'auth_states.dart';
+
 class AuthCubit extends Cubit<AuthState>{
   final AuthRepo authRepo;
   AppUser? _currentUser;
@@ -28,11 +31,50 @@ class AuthCubit extends Cubit<AuthState>{
 
 
   // get current user
-  
-  
-  // login with email + pw
+  AppUser? get currentUser => _currentUser ;
 
+  // login with email + pw
+  Future<void> login(String email, String pw) async {
+    try {
+      emit(AuthLoading());
+      final user = await authRepo.loginWithEmailPassword(email, pw);
+
+      if (user != null) {
+        _currentUser = user;
+        emit(authenticated(user));
+      } else {
+        emit(Unauthenticated());
+      }
+    } catch (e) {
+      emit(AuthError(e.toString()));
+      emit(Unauthenticated());
+
+    }
+  }
   // register withh email + pw
+  Future<void> register(String name, String email, String pw) async {
+    try {
+      emit(AuthLoading());
+      final user = await authRepo.registerWithEmailPassword(name, email, pw);
+
+      if (user != null) {
+        _currentUser = user;
+        emit(authenticated(user));
+      } else {
+        emit(Unauthenticated());
+      }
+    } catch (e) {
+      emit(AuthError(e.toString()));
+      emit(Unauthenticated());
+
+    }
+  }
+
 
   // logout
+
+  Future<void> logout() async {
+    authRepo.logout();
+    emit(Unauthenticated());
+  }
 }

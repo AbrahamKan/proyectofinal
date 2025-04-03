@@ -9,7 +9,7 @@ class FirebaseAuthRepo implements AuthRepo{
   @override
   Future<AppUser?> loginWithEmailPassword(String email, String password) async{
     try{
-      
+
       //attempt sign in
       UserCredential userCredential = await firebaseAuth.
           signInWithEmailAndPassword(email: email, password: password);
