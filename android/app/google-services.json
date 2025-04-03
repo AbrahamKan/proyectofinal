@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "926519603344",
+    "project_id": "proyectsocialmediaapp",
+    "storage_bucket": "proyectsocialmediaapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:926519603344:android:a29dbad4e78b2f1a1b6815",
+        "android_client_info": {
+          "package_name": "com.example.proyectofinal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbs3nU9RRxz-ZkfwT6XR_u9alQhcheczk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
