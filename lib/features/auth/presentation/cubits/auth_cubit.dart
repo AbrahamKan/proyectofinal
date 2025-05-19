@@ -8,8 +8,6 @@ import 'package:proyectofinal/features/auth/domain/entities/app_user.dart';
 import 'package:proyectofinal/features/auth/domain/repos/auth_repo.dart';
 import 'package:proyectofinal/features/auth/presentation/cubits/auth_states.dart';
 
-import '../../domain/entities/app_user.dart';
-import 'auth_states.dart';
 
 class AuthCubit extends Cubit<AuthState>{
   final AuthRepo authRepo;
@@ -23,7 +21,7 @@ class AuthCubit extends Cubit<AuthState>{
 
     if (user != null){
       _currentUser = user;
-      emit(authenticated(user));
+      emit(Authenticated(user));
     } else {
       emit(Unauthenticated());
     }
@@ -41,7 +39,7 @@ class AuthCubit extends Cubit<AuthState>{
 
       if (user != null) {
         _currentUser = user;
-        emit(authenticated(user));
+        emit(Authenticated(user));
       } else {
         emit(Unauthenticated());
       }
@@ -59,7 +57,7 @@ class AuthCubit extends Cubit<AuthState>{
 
       if (user != null) {
         _currentUser = user;
-        emit(authenticated(user));
+        emit(Authenticated(user));
       } else {
         emit(Unauthenticated());
       }
