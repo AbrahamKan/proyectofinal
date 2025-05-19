@@ -15,7 +15,7 @@ class ProfileCubit extends Cubit<ProfileState>{
       final user = await profileRepo.fetchUserProfile(uid);
 
       if (user != null){
-        emit(ProfileLoaded(user as ProfileError));
+        emit(ProfileLoaded(user));
       } else {
         emit(ProfileError("User not found"));
       }

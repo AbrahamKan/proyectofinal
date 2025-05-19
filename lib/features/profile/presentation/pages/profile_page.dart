@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:proyectofinal/features/auth/domain/entities/app_user.dart';
 import 'package:proyectofinal/features/auth/presentation/cubits/auth_cubit.dart';
+import 'package:proyectofinal/features/profile/presentation/components/bio_box.dart';
 import 'package:proyectofinal/features/profile/presentation/cubits/profile_cubit.dart';
 import 'package:proyectofinal/features/profile/presentation/cubits/profile_states.dart';
+
+import 'edit_profile_page.dart';
 
 class ProfilePage extends StatefulWidget {
   final String uid;
@@ -50,12 +53,76 @@ class _ProfilePageState extends State<ProfilePage> {
           return Scaffold(
             //APP BAR
             appBar: AppBar(
-              title: Text(currentUser!.email),
+              title: Text(user.name),
               foregroundColor: Theme.of(context).colorScheme.primary,
+              actions: [
+                //edit profile button
+                IconButton(
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => EditProfilePage(user: user,),
+                )), 
+                icon: const Icon(Icons.settings),
+                )
+              ],
             ),
 
             //BODY
+            body: Column(children: [
+              //email
+              Text(user.email, 
+                              style: 
+                              TextStyle(color: Theme.of(context).colorScheme.primary),
+                ),
+            
+                const SizedBox(height: 25),
+            
+                //profile pic 
+                Container(
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.secondary,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  height: 120,
+                  width: 120,
+                  padding: const EdgeInsets.all(25),
+                  child: Center(child: Icon(Icons.person, size: 72, color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                ),
+            
+                  const SizedBox(height: 25),
+                  //bio box
+                  Padding(
+                    padding: const EdgeInsets.only(left: 25.0),
+                    child: Row(
+                      children: [
+                        Text("Bio", style: TextStyle(color: Theme.of(context).colorScheme.primary),
+                        ),
+                      ],
+                    ),
+                  ),
 
+                  const SizedBox(height: 10),
+
+
+                  BioBox(text: user.bio),
+
+                  //posts 
+                  Padding(
+                    padding: const EdgeInsets.only(left: 25.0, top: 25),
+                    child: Row(
+                      children: [
+                        Text("Posts", 
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.primary),
+                        ),
+                      ],
+                    ),
+                  ),
+              ],
+            ),
           );
         }
 

@@ -4,6 +4,7 @@ PROFILE STATES
 
  */
 
+import 'package:proyectofinal/features/profile/domain/entities/profile_user.dart';
 abstract class ProfileState {}
 
 //initial
@@ -14,7 +15,7 @@ class ProfileLoading extends ProfileState {}
 
 //loaded
 class ProfileLoaded extends ProfileState {
-  final ProfileError profileUser;
+  final ProfileUser profileUser; // ✅ CORRECTO
   ProfileLoaded(this.profileUser);
 }
 
