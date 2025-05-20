@@ -2,13 +2,13 @@ import 'package:proyectofinal/features/post/domain/entities/post.dart';
 
 abstract class PostState {}
 
-//initial 
+//initial
 class PostsInitial extends PostState{}
 
-//loading 
+//loading
 class PostsLoading extends PostState{}
 
-//uploading 
+//uploading
 class PostUploading extends PostState{}
 
 //error

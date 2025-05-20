@@ -3,8 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:proyectofinal/features/auth/data/firebase_auth_repo.dart';
 import 'package:proyectofinal/features/auth/presentation/cubits/auth_cubit.dart';
 import 'package:proyectofinal/features/auth/presentation/cubits/auth_states.dart';
+import 'package:proyectofinal/features/post/data/firebase_post_repo.dart';
+import 'package:proyectofinal/features/post/presentation/cubits/post_cubit.dart';
 import 'package:proyectofinal/features/profile/data/firebase_profile_repo.dart';
 import 'package:proyectofinal/features/profile/presentation/cubits/profile_cubit.dart';
+import 'package:proyectofinal/features/search/data/firebase_search_repo.dart';
+import 'package:proyectofinal/features/search/presentation/cubits/search_cubit.dart';
 import 'package:proyectofinal/features/storage/data/firebase_storage_repo.dart';
 import 'features/auth/presentation/pages/auth_page.dart';
 import 'features/home/presentation/pages/home_page.dart';
@@ -29,6 +33,12 @@ class MyApp extends StatelessWidget {
   // storage repo
   final firebaseStorageRepo = FirebaseStorageRepo();
 
+  //post repo
+  final firebasePostRepo = FirebasePostRepo();
+
+  //search repo
+  final firebaseSearchRepo = FirebaseSearchRepo();
+
   MyApp({super.key});
 
   @override
@@ -47,6 +57,17 @@ class MyApp extends StatelessWidget {
             profileRepo: firebaseProfileRepo,
             storageRepo: firebaseStorageRepo,
           ),
+        ),
+
+        //post cubit
+        BlocProvider<PostCubit>(create: (context) => PostCubit(
+          postRepo: firebasePostRepo, storageRepo: firebaseStorageRepo,
+          ),
+        ),
+
+        //search cubit
+        BlocProvider<SearchCubit>(
+          create: (context) => SearchCubit(searchRepo: firebaseSearchRepo),
         ),
       ],
       child: MaterialApp(
